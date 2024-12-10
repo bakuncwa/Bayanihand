@@ -1,0 +1,129 @@
+﻿@model HandymanVM
+
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 12px;
+        border: 1px solid #ddd;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f4f4f4;
+        font-weight: bold;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    tr:hover {
+        background-color: #eaeaea;
+    }
+</style>
+
+<form asp-controller="Handyman" asp-action="CreateProfile" method="post">
+
+    <div class="vstack gap-3 col-lg-12" style="padding-top: 5vh; padding-bottom: 5vh;">
+
+        <span style="color: #5188F5; padding-left: 15vw; padding-right: 15vw; text-align: center">
+            <h3>
+                Want to get in touch sa mga may kailangan ng tulong? <br />
+                <span style="color: #FF911F"><b><i>Gawa ka na muna ng profile!</i></b></span>
+            </h3>
+        </span>
+
+        <input asp-for="Id" type="hidden" class="form-control" />
+
+        <div class="row">
+            <div class="col-4">
+                <h4>Personal Information</h4>
+                <div class="form-group">
+                    <label asp-for="LastName" class="control-label">Last Name</label>
+                    <input asp-for="LastName" class="form-control" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="FirstName" class="control-label">First Name</label>
+                    <input asp-for="FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="PhoneNo" class="control-label">Phone Number</label>
+                    <input asp-for="PhoneNo" class="form-control" />
+                    <span asp-validation-for="PhoneNo" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <h4>Location</h4>
+                <div class="form-group">
+                    <label asp-for="Address" class="control-label">Address</label>
+                    <input asp-for="Address" class="form-control" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="BarangayNo" class="control-label">Barangay No</label>
+                    <input asp-for="BarangayNo" class="form-control" />
+                    <span asp-validation-for="BarangayNo" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="BarangayName" class="control-label">Barangay Name</label>
+                    <input asp-for="BarangayName" class="form-control" />
+                    <span asp-validation-for="BarangayName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Region" class="control-label">Region</label>
+                    <input asp-for="Region" class="form-control" />
+                    <span asp-validation-for="Region" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="City" class="control-label">City</label>
+                    <input asp-for="City" class="form-control" />
+                    <span asp-validation-for="City" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ZIPCode" class="control-label">ZIP Code</label>
+                    <input asp-for="ZIPCode" class="form-control" />
+                    <span asp-validation-for="ZIPCode" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <h4>Handy Details</h4>
+                <div class="form-group">
+                    <label asp-for="ServiceCharge">Service Charge/hr</label>
+                    <input type="number" asp-for="ServiceCharge" class="form-control" step="0.01" />
+                    <span asp-validation-for="ServiceCharge" class="text-danger"></span>
+                    <br />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="YearsOfExperience" class="control-label">Years of Experience</label>
+                    <input asp-for="YearsOfExperience" class="form-control" />
+                    <span asp-validation-for="YearsOfExperience" class="text-danger"></span>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vstack gap-3 col-lg-12" style="padding-top: 5vh; padding-bottom: 5vh; padding-left: 60vw">
+        <button type="submit" class="btn btn-outline-primary" style="color: #FF911F">
+            <i class="fa-solid fa-user"></i>
+            Create Profile
+        </button>
+    </div>
+
+</form>

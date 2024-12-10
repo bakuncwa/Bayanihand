@@ -1,0 +1,19 @@
+﻿@using Bayanihand.DataModel
+@model Cart
+
+<h2>Checkout Result</h2>
+
+@{
+    var message = TempData["CheckoutMessage"] as string;
+}
+
+@if (message == "success")
+{
+    <p>Your commission request has been successfully processed.</p>
+}
+else if (message == "error")
+{
+    <p>There was a problem processing your commission request. Please try again.</p>
+}
+
+<a asp-controller="Cart" asp-action="History" class="btn btn-warning"><i class="fa-solid fa-receipt"></i>Commission History</a>

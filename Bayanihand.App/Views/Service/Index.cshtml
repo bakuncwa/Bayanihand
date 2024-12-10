@@ -1,0 +1,85 @@
+﻿@model List<Bayanihand.App.Models.ServiceVM>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.all.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.min.css" rel="stylesheet">
+
+<a asp-controller="Home" asp-action="Index" class="btn btn-primary">
+    <i class="fas fa-caret-square-left"></i>
+    Back to Home Page
+</a>
+
+@if (Model.Count() < 1)
+{
+    <div class="alert alert-info">
+        No Service Records Found...
+    </div>
+}
+else
+{
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Service</th>
+                <th>Description</th>
+                <th>Available</th>
+                <th>Wage Rate/hr</th>
+                <th>Service Charge/hr</th>
+                <th>Material Cost</th>
+                <th>Total Price/hr</th>
+                <th>Payment Option</th>
+                <th>Select</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.ServiceName</td>
+                    <td>@item.Description</td>
+                    <td>@(item.Available ? "Yes" : "No")</td>
+                    <td>PHP @item.WageRate.ToString("F2")</td>
+                    <td>PHP @item.ServiceCharge.ToString("F2")</td>
+                    <td>PHP @item.MaterialCost.ToString("F2")</td>
+                    <td>PHP @item.TotalPrice.ToString("F2")</td>
+                    <td>@item.PaymentOption</td>
+                    <td>
+                        <div>
+                            <p>Price: PHP <h2>@item.TotalPrice.ToString("F2")</h2></p>
+                            <form asp-controller="Cart" asp-action="AddServiceToCart" method="post">
+                                <input type="hidden" name="serviceId" value="@item.Id" />
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    Add to Cart
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@if (TempData["Message"] != null)
+{
+    <script>
+        Swal.fire({
+            icon: 'warning',
+            title: 'Service Not Available',
+            text: '@TempData["Message"]'
+        });
+    </script>
+}
+
+<script>
+    document.getElementById("addToCartButton").addEventListener("click", function () {
+        if ('@TempData["Message"]' !== '') {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Service Not Available',
+                text: '@TempData["Message"]'
+            });
+        }
+    });
+</script>
+

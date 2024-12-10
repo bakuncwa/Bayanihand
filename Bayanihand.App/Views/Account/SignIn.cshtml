@@ -1,0 +1,32 @@
+﻿@model SignInVM
+
+ <div style="padding-top: 8vw">
+    <div class="card mx-auto" style="width: 30vw; background-color: #FAF9F6;">
+        <form asp-controller="Account" asp-action="SignIn" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <div class="p-5">
+                <h3 class="text-center" style="color: #FF911F;"><b><i>Login</i></b></h3>
+
+                <div class="mb-3">
+                    <label asp-for="UserName" class="form-label" style="color: #5188F5;"><b>Username</b></label>
+                    <input asp-for="UserName" class="form-control" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Password" class="form-label" style="color: #5188F5;"><b>Password</b></label>
+                    <input asp-for="Password" class="form-control" type="password" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-outline-primary" style="color: #FF911F;">
+                        <i class="fa-solid fa-user"></i> <b>Login</b>
+                    </button>
+                    <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">
+                        <i class="fa fa-arrow-left"></i> <b>Back</b>
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+ </div>

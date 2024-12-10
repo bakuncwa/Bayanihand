@@ -1,0 +1,56 @@
+﻿@model Bayanihand.App.Models.ScheduleVM
+
+@{
+    ViewData["Title"] = "Add New Schedule";
+}
+
+<h2>Add New Schedule</h2>
+
+<a asp-controller="Schedule" asp-action="Index" class="btn btn-primary">
+    <i class="fas fa-caret-square-left"></i> Back to Schedule List
+</a>
+
+<form asp-action="Add" method="post">
+    <div class="form-group">
+        <label asp-for="Visit" class="control-label">Handyman Name</label>
+        <input asp-for="Visit" class="form-control" />
+        <span asp-validation-for="Visit" class="text-danger"></span>
+    </div>
+    <br>
+    <div class="form-group">
+        <label asp-for="HandymanPhoneNo" class="control-label">Phone Number</label>
+        <input asp-for="HandymanPhoneNo" class="form-control" />
+        <span asp-validation-for="HandymanPhoneNo" class="text-danger"></span>
+    </div>
+    <br>
+    <div class="form-group">
+        <label asp-for="MeetUpLocation" class="control-label">Meet Up Location</label>
+        <input asp-for="MeetUpLocation" class="form-control" />
+        <span asp-validation-for="MeetUpLocation" class="text-danger"></span>
+    </div>
+    <br>
+    <div class="form-group">
+        <label asp-for="MeetUpDay" class="control-label">Meet Up Day</label>
+        <input asp-for="MeetUpDay" class="form-control" />
+        <span asp-validation-for="MeetUpDay" class="text-danger"></span>
+    </div>
+    <br>
+    <div class="form-group">
+        <label asp-for="MeetUpTime" class="control-label">Meet Up Time</label>
+        <input asp-for="MeetUpTime" class="form-control" />
+        <span asp-validation-for="MeetUpTime" class="text-danger"></span>
+    </div>
+    <br>
+    <div class="form-group">
+        <label asp-for="DateAdded" class="control-label">Date Added</label>
+        <input asp-for="DateAdded" class="form-control" readonly="readonly" />
+        <span asp-validation-for="DateAdded" class="text-danger"></span>
+    </div>
+    <br>
+
+    <button type="submit" class="btn btn-warning"><i class="fas fa-plus"></i>Add Schedule</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,92 @@
+﻿@model List<Bayanihand.App.Models.HistoryVM>
+
+<h2>Your Commission History</h2>
+
+@if (Model.Count() < 1)
+{
+    <div class="alert alert-info">
+        No Commission Records Found...
+    </div>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Service Name</th>
+                <th>Wage Rate/hr</th>
+                <th>Service Charge/hr</th>
+                <th>Material Cost</th>
+                <th>Total Price/hr</th>
+                <th>Payment Option</th>
+                <th>Schedule</th>
+                <th>Handyman Name</th>
+                <th>Handyman Phone Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.ServiceDetails</td>
+                    <td>@item.WageRate</td>
+                    <td>@item.ServiceCharge</td>
+                    <td>@item.MaterialCost</td>
+                    <td>@item.TotalPrice</td>
+                    <td>@item.PaymentOption</td>
+                    <td>@item.ScheduleDetails</td>
+                    <td>@item.Visit</td>
+                    <td>@item.HandymanPhoneNo</td>
+                    <td>
+                        @if (@item.RatingValue != null)
+                        {
+                            <p><strong>Rating:</strong> @item.RatingValue/5</p>
+                            <p><strong>Comment:</strong> @item.Comment</p>
+                        }
+                        else
+                        {
+                            <p>No rating yet</p>
+                        }
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ratingModal-@item.CartCommissionId">
+                            <i class="fa-solid fa-star"></i>Rate
+                        </button>
+
+                        <!-- Modal for Adding Rating -->
+                        <div class="modal fade" id="ratingModal-@item.CartCommissionId" tabindex="-1" aria-labelledby="ratingModalLabel-@item.CartCommissionId" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="ratingModalLabel-@item.CartCommissionId">Add Rating</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <form asp-action="AddRating" method="post">
+                                        <div class="modal-body">
+                                            <input type="hidden" name="CartCommissionId" value="@item.CartCommissionId" />
+                                            <div class="mb-3">
+                                                <label for="RatingValue" class="form-label">Rating (1-5)</label>
+                                                <input type="number" class="form-control" id="RatingValue" name="RatingValue" min="1" max="5" required />
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="Comment" class="form-label">Comment</label>
+                                                <textarea class="form-control" id="Comment" name="Comment" rows="3" required></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+}

@@ -1,0 +1,23 @@
+﻿@model CustomerVM
+
+<h3>Create Customer Profile</h3>
+
+<form asp-controller="Customer" asp-action="Add" method="post">
+
+    <label asp-for="LastName"></label>
+    <input type="text" asp-for="LastName" class="form-control" />
+    <br />
+
+    <label asp-for="FirstName"></label>
+    <input type="text" asp-for="FirstName" class="form-control" />
+    <br />
+
+    <label asp-for="PhoneNo"></label>
+    <input type="text" asp-for="PhoneNo" class="form-control" />
+    <br />
+
+    <a asp-controller="Customer" asp-action="Index" class="btn btn-primary">
+        Back
+    </a>
+    <input type="submit" value="Add Customer" class="btn btn-primary" />
+</form>

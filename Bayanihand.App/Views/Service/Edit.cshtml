@@ -1,0 +1,68 @@
+﻿@model Bayanihand.App.Models.ServiceVM
+
+<h3>Edit Service</h3>
+
+<form asp-controller="Service" asp-action="Edit" method="post">
+
+    <input type="hidden" asp-for="Id" />
+
+    <label asp-for="ServiceName">Service Name</label>
+    <input type="text" asp-for="ServiceName" class="form-control" />
+    <span asp-validation-for="ServiceName" class="text-danger"></span>
+    <br />
+
+    <label asp-for="Description">Description</label>
+    <input type="text" asp-for="Description" class="form-control" />
+    <span asp-validation-for="Description" class="text-danger"></span>
+    <br />
+
+    <div class="form-group">
+        <label asp-for="Available">Available</label>
+        <div>
+            <input type="radio" asp-for="Available" value="true" id="availableYes" />
+            <label for="availableYes">Yes</label>
+            <input type="radio" asp-for="Available" value="false" id="availableNo" />
+            <label for="availableNo">No</label>
+        </div>
+        <span asp-validation-for="Available" class="text-danger"></span>
+    </div>
+    <br/>
+
+    <label asp-for="WageRate">Wage Rate/hr</label>
+    <input type="text" asp-for="WageRate" class="form-control" value="@Model.WageRate.ToString()" readonly />
+    <span asp-validation-for="WageRate" class="text-danger"></span>
+    <br />
+
+    <label asp-for="ServiceCharge">Service Charge/hr</label>
+    <input type="number" asp-for="ServiceCharge" class="form-control" step="0.01" />
+    <span asp-validation-for="ServiceCharge" class="text-danger"></span>
+    <br />
+
+    <label asp-for="MaterialCost">Material Cost</label>
+    <input type="number" asp-for="MaterialCost" class="form-control" step="0.01" />
+    <span asp-validation-for="MaterialCost" class="text-danger"></span>
+    <br />
+
+    <label asp-for="TotalPrice">Total Price/hr</label>
+    <input type="number" asp-for="TotalPrice" class="form-control" step="0.01" disabled />
+    <span asp-validation-for="TotalPrice" class="text-danger"></span>
+    <br />
+
+    <div class="form-group">
+        <label asp-for="PaymentOption">Payment Option</label>
+        <select asp-for="PaymentOption" class="form-control">
+            <option value="">-- Select Payment Option --</option>
+            <option value="Cash">Cash</option>
+            <option value="E-Wallet">E-Wallet</option>
+            <option value="Card">Card</option>
+        </select>
+        <span asp-validation-for="PaymentOption" class="text-danger"></span>
+    </div>
+
+    <br />
+
+    <a asp-controller="Service" asp-action="Manage" class="btn btn-primary">
+        Back
+    </a>
+    <input type="submit" value="Update Service" class="btn btn-primary" />
+</form>

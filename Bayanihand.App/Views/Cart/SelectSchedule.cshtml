@@ -1,0 +1,22 @@
+﻿@using Bayanihand.DataModel
+@model CartCommission
+
+<h2>Select a Schedule for @Model.Service.ServiceName</h2>
+
+<form asp-action="SelectSchedule" method="post">
+    <input type="hidden" name="cartItemId" value="@Model.Id" />
+
+    <div class="form-group">
+        <label for="schedule">Select Schedule:</label>
+        <select name="scheduleId" class="form-control" required>
+            @foreach (var schedule in ViewBag.Schedules as List<Schedule>)
+            {
+                <option value="@schedule.Id">
+                    @schedule.Visit - @schedule.HandymanPhoneNo - @schedule.MeetUpLocation - @schedule.MeetUpDay - @schedule.MeetUpTime - @schedule.DateAdded.ToString("MM/dd/yyyy") - @schedule.DateUpdated
+                </option>
+            }
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Confirm Schedule</button>
+</form>

@@ -1,0 +1,27 @@
+﻿@model CustomerVM
+
+<h3>Edit Customer Profile</h3>
+
+<form asp-controller="Customer" asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <label asp-for="LastName"></label>
+    <input type="text" asp-for="LastName" class="form-control" />
+    <span asp-validation-for="LastName" class="text-danger"></span>
+    <br />
+
+    <label asp-for="FirstName"></label>
+    <input type="text" asp-for="FirstName" class="form-control" />
+    <span asp-validation-for="FirstName" class="text-danger"></span>
+    <br />
+
+    <label asp-for="PhoneNo"></label>
+    <input type="text" asp-for="PhoneNo" class="form-control" />
+    <span asp-validation-for="PhoneNo" class="text-danger"></span>
+    <br />
+
+    <a asp-controller="Customer" asp-action="Index" class="btn btn-primary">
+        Back
+    </a>
+    <input type="submit" class="btn btn-success" value="Save Changes" />
+</form>

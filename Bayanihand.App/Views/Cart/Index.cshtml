@@ -1,0 +1,54 @@
+﻿@using Bayanihand.DataModel
+@model Cart
+
+<h2>Your Commission Cart</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Service</th>
+            <th>Schedule</th>
+            <th>Total Price/hr</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td>@item.Service?.ServiceName</td>
+                <td>
+                    @if (item.Schedule != null)
+                    {
+                        <span>@item.Schedule.MeetUpLocation</span>
+
+                        <br />
+                        <span>@item.Schedule.MeetUpDay</span>
+
+                        <br />
+                        <span>@item.Schedule.MeetUpTime</span>
+
+                        <br />
+                        <span>@item.Schedule.DateAdded.ToString("MM/dd/yyyy")</span>
+
+                        <br />
+                        <span>@item.Schedule.DateUpdated?.ToString("MM/dd/yyyy")</span>
+                    }
+                </td>
+                <td>PHP @item.TotalPrice.ToString("F2")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (Model.Items != null && Model.Items.Any())
+{
+    <form asp-action="CheckoutResult" method="post">
+        <button type="submit" class="btn btn-primary">
+            <i class="fas fa-check-square"></i> Checkout
+        </button>
+    </form>
+}
+else
+{
+    <p>Your commission cart is empty.</p>
+}

@@ -1,0 +1,95 @@
+﻿@model List<ScheduleVM>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.all.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.min.css" rel="stylesheet">
+
+<a asp-controller="Home" asp-action="Index" class="btn btn-primary">
+    <i class="fas fa-caret-square-left"></i>
+    Back to Home Page
+</a>
+
+<a asp-controller="Schedule" asp-action="Add" class="btn btn-warning">
+    <i class="fas fa-plus"></i>
+    Add Schedule
+</a>
+
+<br />
+<br />
+
+@if (Model == null || !Model.Any())
+{
+    <div class="alert alert-info">
+        No Schedule Records Found...
+    </div>
+}
+else
+{
+    <table id="ScheduleTable" class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Handyman Surame</th>
+                <th>Handyman Phone Number</th>
+                <th>Meet Up Location</th>
+                <th>Meet Up Day</th>
+                <th>Meet Up Time</th>
+                <th>Date Added</th>
+                <th>Date Updated</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Visit</td>
+                    <td>@item.HandymanPhoneNo</td>
+                    <td>@item.MeetUpLocation</td>
+                    <td>@item.MeetUpDay</td>
+                    <td>@item.MeetUpTime</td>
+                    <td>@item.DateAdded.ToString("MM/dd/yyyy")</td>
+                    <td>@item.DateUpdated?.ToString("MM/dd/yyyy")</td>
+                    <td>
+                        <a asp-controller="Schedule" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-info btn-sm">
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
+                        <button class="btn btn-danger btn-sm deleteBtn" data-id="@item.Id">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<form id="DeleteForm" asp-controller="Schedule" asp-action="Delete" method="post">
+    <input type="hidden" id="HiddenScheduleId" name="Id" value="" />
+</form>
+
+@section Scripts {
+    <script>
+        $('.deleteBtn').click(function (e) {
+            e.preventDefault();
+
+            var btn = $(this);
+            var id = btn.data("id");
+
+            Swal.fire({
+                title: "Are you sure?",
+                text: "Are you sure you want to delete this schedule?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $("#HiddenScheduleId").val(id);
+                    $("#DeleteForm").submit();
+                }
+            });
+        });
+    </script>
+}
